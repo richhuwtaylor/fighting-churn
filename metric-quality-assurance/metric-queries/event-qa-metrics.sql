@@ -1,6 +1,6 @@
 -- Calculate QA metrics for events
 
--- We check the count, mean average, min and max values for the 'like_per_month' metric 
+-- We check the count, mean average, min and max values for the specified metric 
 -- for each date. 
 
 -- Rather than aggregating by grouping by the metric_time column, we explicitly
