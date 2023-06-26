@@ -1,6 +1,6 @@
 -- Save a metric for the number of 'like' events for each account into our 'metric' table.
 -- Likes are aggregated over the 28-day period preceding each measurement date,
--- and measuements are made every 7 days.
+-- and measurements are made every 7 days.
 
 -- We assume that the metric_name_id for the 'like' event is 0.
 

@@ -1,3 +1,5 @@
+-- Calculate QA metrics for events
+
 -- We check the count, mean average, min and max values for the 'like_per_month' metric 
 -- for each date. 
 
