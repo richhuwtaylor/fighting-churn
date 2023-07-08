@@ -1,0 +1,6 @@
+,metrics
+metric_group_1,adview_per_month|like_per_month|newfriend_per_month|post_per_month
+metric_group_2,message_per_month|reply_per_month
+account_tenure,account_tenure
+dislike_per_month,dislike_per_month
+unfriend_per_month,unfriend_per_month

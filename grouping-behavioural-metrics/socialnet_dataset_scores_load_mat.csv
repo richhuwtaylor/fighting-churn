@@ -1,0 +1,10 @@
+,metric_group_1,metric_group_2,account_tenure,dislike_per_month,unfriend_per_month
+adview_per_month,0.35355339059327373,0.0,0.0,0.0,0.0
+like_per_month,0.35355339059327373,0.0,0.0,0.0,0.0
+newfriend_per_month,0.35355339059327373,0.0,0.0,0.0,0.0
+post_per_month,0.35355339059327373,0.0,0.0,0.0,0.0
+message_per_month,0.0,0.7071067811865475,0.0,0.0,0.0
+reply_per_month,0.0,0.7071067811865475,0.0,0.0,0.0
+account_tenure,0.0,0.0,1.0,0.0,0.0
+dislike_per_month,0.0,0.0,0.0,1.0,0.0
+unfriend_per_month,0.0,0.0,0.0,0.0,1.0
