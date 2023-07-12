@@ -1,6 +1,6 @@
 -- Create a current customer dataset suitable for segmentation.
 
--- Here, we use max(metric_time) because we're interesed in the last date on which
+-- Here, we use max(metric_time) because we're interested in the last date on which
 -- we updated the data, although we could use any date instead.
 
 WITH metric_date AS

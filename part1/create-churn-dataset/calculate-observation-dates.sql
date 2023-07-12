@@ -1,4 +1,4 @@
--- Calculate the observation dates for each account. This script ASsumes that an 
+-- Calculate the observation dates for each account. This script assumes that an 
 -- active_period table exists with periods defined from subscriptions.
 
 -- 1) Initialize the recursive CTE with one observation for every active_period:
