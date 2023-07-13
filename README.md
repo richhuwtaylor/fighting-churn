@@ -25,7 +25,17 @@ The SQL scripts and Python notebooks of this project follow the natural order of
 - [metric-cohorts](./part2/metric-cohorts/) contains notebooks for performing cohort analysis on inidividual and grouped versions of our metrics.
 - [metric-correlations](./part2/metric-correlations/) contains a notebook for calculating and visualising the matrix of Pearson correlation coefficients between metrics.
 - [group-behavioural-metrics](./part2/group-behavioural-metrics/) contains notebooks for:
-    - grouping metrics together using hierarchical clustering and generating a loading matrix for averaging together the scores of those groups
+    - grouping metrics together using hierarchical clustering (using SciPy's `linkage` and `fcluster`) and generating a loading matrix for averaging together the scores of those groups
     - applying the loading matrix to create grouped scores.
 
 The subscription data, analytics data and the churn metrics produced from them are stored locally in a PostgreSQL database.
+
+### Future work
+
+Some ways in which this project could be expanded are:
+
+- *ratios of metrics* - perform cohort analysis for ratios of metrics such as 
+    - replies per message
+    - likes per post
+    - posts per message
+    - unfriends per new friend

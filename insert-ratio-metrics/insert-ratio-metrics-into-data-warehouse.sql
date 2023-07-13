@@ -1,3 +1,5 @@
+-- Insert metrics which are ratios 
+
 INSERT INTRO socialnet7.metric_name VALUES (%new_metric_id, concat('%new_metric_name'))
 ON CONFLICT DO NOTHING;
 
