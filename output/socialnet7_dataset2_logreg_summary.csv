@@ -1,0 +1,11 @@
+group_metric_offset,weight,retain_impact,group_metrics
+metric_group_1,0.6105978980029065,0.012751719928348004,adview_per_month|like_per_month|newfriend_per_month|post_per_message|post_per_month
+metric_group_2,-0.10435934025717175,-0.0030203169992988332,unfriend_per_month|unfriend_per_newfriend
+metric_group_3,0.6778116221057606,0.013750673906545052,message_per_month|reply_per_month
+dislike_per_month,-0.11277191441137209,-0.0032769280136668577,dislike_per_month
+adview_per_post,-0.3188604166038532,-0.010235154194940699,adview_per_post
+reply_per_message,-0.026286454372542286,-0.0007330602099264727,reply_per_message
+dislike_pcnt,-0.002006440415937224,-5.531618052390108e-05,dislike_pcnt
+newfriend_pcnt_chng,0.17551602518990472,0.004454125260051511,newfriend_pcnt_chng
+days_since_newfriend,-0.14721702683248578,-0.004348951989796457,days_since_newfriend
+offset,3.5344858943431072,0.9716532300963451,(baseline)
