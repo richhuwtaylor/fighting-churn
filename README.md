@@ -6,7 +6,10 @@ The SQL and python scripts included in this repo are intended to be used on the 
 
 The SQL scripts and Python notebooks of this project follow the natural order of any effort to combat churn. They should be followed and executed in order. Any intermediate outputs are held in the [output](./output/) folder.
 
-### Part 1 ###
+### Part 1 
+
+Focuses on setting up the metrics used for churn analysis.
+
 - [churn-calculations](./part1/churn-calculations/) includes SQL scripts for calculating:
     - activity event based churn
     - MRR churn
@@ -19,7 +22,10 @@ The SQL scripts and Python notebooks of this project follow the natural order of
 - [identify-active-periods](./part1/identify-active-periods/) contains SQL scripts for calculating the active periods (allowing for a maximum 7 day gap between subscriptions) and inserting these into an `active_period` table. These are used to determine whether or not a metric observation ended in churn.
 - [create-churn-dataset](./part1/create-churn-dataset/) is where the the fun begins! Here, we create a dataset of 'per-month' event metric observations which form the basis of our churn analysis.
 
-### Part 2 ###
+### Part 2 
+
+Focuses on cohort analysis and clustering metrics into groups of behaviours. These metrics and groups could then be used by the business to target interventions to stop people from churning from the product.
+
 - [metric-summary-stats](./part2/metric-summary-stats/) contains a notebook for checking summary statistics for all metrics (so that we can check the percentage of zero-values).
 - [metric-scores](./part2/metric-scores/) contains a notebook for producing normalised ("scored") versions of each event metric.
 - [metric-cohorts](./part2/metric-cohorts/) contains notebooks for performing cohort analysis on inidividual and grouped versions of our metrics.
@@ -27,6 +33,10 @@ The SQL scripts and Python notebooks of this project follow the natural order of
 - [group-behavioural-metrics](./part2/group-behavioural-metrics/) contains notebooks for:
     - grouping metrics together using hierarchical clustering (using SciPy's `linkage` and `fcluster`) and generating a loading matrix for averaging together the scores of those groups
     - applying the loading matrix to create grouped scores.
+
+### Part 3 
+
+Focuses on forecasting churn probability with logistic regression.
 
 The subscription data, analytics data and the churn metrics produced from them are stored locally in a PostgreSQL database.
 

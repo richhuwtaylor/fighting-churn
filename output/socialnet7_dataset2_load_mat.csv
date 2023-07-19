@@ -1,0 +1,16 @@
+,metric_group_1,metric_group_2,metric_group_3,dislike_per_month,adview_per_post,reply_per_message,dislike_pcnt,newfriend_pcnt_chng,days_since_newfriend
+adview_per_month,0.26967994498529685,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+like_per_month,0.26967994498529685,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+newfriend_per_month,0.26967994498529685,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+post_per_message,0.26967994498529685,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+post_per_month,0.26967994498529685,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+unfriend_per_month,0.0,0.674199862463242,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+unfriend_per_newfriend,0.0,0.674199862463242,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+message_per_month,0.0,0.0,0.674199862463242,0.0,0.0,0.0,0.0,0.0,0.0
+reply_per_month,0.0,0.0,0.674199862463242,0.0,0.0,0.0,0.0,0.0,0.0
+dislike_per_month,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0
+adview_per_post,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0
+reply_per_message,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0
+dislike_pcnt,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+newfriend_pcnt_chng,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0
+days_since_newfriend,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0
