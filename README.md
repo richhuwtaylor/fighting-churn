@@ -38,6 +38,11 @@ Focuses on cohort analysis and clustering metrics into groups of behaviours. The
 
 Focuses on forecasting churn probability with logistic regression.
 
+- [train-model](./part3/train-model/) contains notebooks for:
+    - training the logistic regression model.
+    - showing the impact of each model parameter (grouped or individual behaviour) on the likelihood of retention/churn, and checking model calibration.
+- [forecast-churn](./part3/forecast-churn/) contains a notebook and SQL script for creating a revised version of the metric dataset which contains current customers only, ready for forecasting.
+
 The subscription data, analytics data and the churn metrics produced from them are stored locally in a PostgreSQL database.
 
 ### Future work
