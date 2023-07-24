@@ -48,9 +48,3 @@ The subscription data, analytics data and the churn metrics produced from them a
 ### Future work
 
 Some ways in which this project could be expanded are:
-
-- *ratios of metrics* - perform cohort analysis for ratios of metrics such as 
-    - replies per message
-    - likes per post
-    - posts per message
-    - unfriends per new friend
