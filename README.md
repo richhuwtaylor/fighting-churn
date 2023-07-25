@@ -113,7 +113,23 @@ Based on these relationships and further investigation, the business may decide 
 
 Although the number event types in our simulation is small, for real products and services, it can be benefitial to group certain event types together into behaviours in order to prevent information overload and discover clearer relationships with churn than individual event types might exhibit. 
 
-We can discover groups of correlated metrics perform hierarchical clustering of metrics using SciPy's `linkage` and `fcluster`. Running this clustering algorithm on an expanded set of 
+We can discover groups of correlated metrics perform hierarchical clustering of metrics using SciPy's `linkage` and `fcluster`. Running this clustering algorithm on an expanded set of metrics gives us these groups:
+
+| Group:         | Descriptive name:          | Metrics:                                                                                |
+|----------------|----------------------------|-----------------------------------------------------------------------------------------|
+| metric_group_1 | Posting and making friends | adview_per_month\|like_per_month\|newfriend_per_month\|post_per_message\|post_per_month |
+| metric_group_2 | Unfriending                | unfriend_per_month\|unfriend_per_newfriend                                              |
+| metric_group_3 | Messaging                  | message_per_month\|reply_per_month                                                      |
+|                | Dislikes per month         | dislike_per_month                                                                       |
+|                | Seeing lots of ads         | adview_per_post                                                                         |
+|                | reply_per_message          | reply_per_message                                                                       |
+|                | More dislikes than likes   | dislike_pcnt                                                                            |
+|                | Increase in new friends    | newfriend_pcnt_chng                                                                     |
+|                | Time since new friend      | days_since_newfriend                                                                    |
+
+We can see that the algorithm groups some metrics into intuitive behaviours, such as posting and making friends, unfriending, and using the platform's messaging features. We can see from the cohort analysis of this first group that the highest scoring cohort has 1/4 of the churn rate of the lowest scoring cohort:
+
+<img src='./example-images/metric-group-1-cohorts.png' alt='Metric group 1 cohort analysis'>
 
 ### Future work
 
