@@ -131,6 +131,100 @@ We can see that the algorithm groups some metrics into intuitive behaviours, suc
 
 <img src='./example-images/metric-group-1-cohorts.png' alt='Metric group 1 cohort analysis'>
 
+### Regession analysis and forecasting
+
+Building a simple logistic regression model allows us to:
+
+- better understand how much each metric/behaviour contributes to the probability of a customer churning 
+
+- make a forecast of how likely it is that current customers churn before their next billing renewal date
+
+In this project, we use `LogisticRegression` from `sklearn.linear_model`.
+
+The model is build on the assumption that while increased customer engagement (as measured by the metrics) leads to an increased chance of retention, this relationship is subjected to _diminishing returns_, i.e. for customers well above or below the average on a particular metric/behaviour, even large increases/decreases in this behaviour will only lead to small increases/decreases in retention probability. To capture this relationship, we use a sigmoid (s-curve) function in the model.
+
+Although engagement is not directly measurable, we assume that behaviour can be estimated from the customer metrics that we've produced. 
+
+Each behavioural metric score is multiplied by an engagement strength (weight/coefficient) that captures how much the behaviour (or group of behaviours) contributes to engagement. Overall engagement is the sum of the contributions for each behaviour, plus an _intercept_ (offset) term which shifts the sigmoidal curve such that a user with zero engagement (average user) has a realistic probability forecast for retention and churn. Without this offset term, a customer in our model with zero engagement would have a 50% churn probability, which is unrealistic.
+
+We set up the model to predict _retention_ because this is easier to interpret: a positive number to represent something good is more intuitive than a negative number.
+
+The result of training the model is a set of _weights_ which capture how much each metric (or group) contributes to engagement, and a set of _retention impacts_ which represent how much difference in the retention probability it would make to be one standard deviation above average for this metric (or group), assuming a customer was average in all other aspects.
+
+| group_metric_offset  | weight       | retain_impact | group_metrics                                                                           |
+|----------------------|--------------|---------------|-----------------------------------------------------------------------------------------|
+| metric_group_1       | 0.610597898  | 0.01275172    | adview_per_month\|like_per_month\|newfriend_per_month\|post_per_message\|post_per_month |
+| metric_group_2       | -0.10435934  | -0.003020317  | unfriend_per_month\|unfriend_per_newfriend                                              |
+| metric_group_3       | 0.677811622  | 0.013750674   | message_per_month\|reply_per_month                                                      |
+| dislike_per_month    | -0.112771914 | -0.003276928  | dislike_per_month                                                                       |
+| adview_per_post      | -0.318860417 | -0.010235154  | adview_per_post                                                                         |
+| reply_per_message    | -0.026286454 | -0.00073306   | reply_per_message                                                                       |
+| dislike_pcnt         | -0.00200644  | -5.53E-05     | dislike_pcnt                                                                            |
+| newfriend_pcnt_chng  | 0.175516025  | 0.004454125   | newfriend_pcnt_chng                                                                     |
+| days_since_newfriend | -0.147217027 | -0.004348952  | days_since_newfriend                                                                    |
+| offset               | 3.534485894  | 0.97165323    | (baseline)                                                                              |
+
+The results for the model offset are included. The `weight` for the offset is not a weight, but just the amount of the offset. The `retain_impact` of the offset is the retention probability forecast for a perfectly average customer (i.e. one with zero scores in all metrics).
+
+The relative impacts of each behaviour or group are more easily understood when represented like this:
+
+<img src='./example-images/logistic-regression-impacts.png' alt='Impact on retention of each metric'>
+
+If the retention impact for a metric is 2%, a customer who is one standard deviation above average on that metric and average in all the other metrics has a forecast retention probability 2% higher than the average retention probability.
+
+These results would suggest that being _above average_ in messaging activity, posting and continuing to make friends have the biggest positive impact on retention, while _being above average_ seeing lots of ads, going long periods between making new friends and disliking content have the biggest negative impact on retention.
+
+Interestingly, the ratio of likes to dislikes has a negligible impact on churn/retention.
+
+It's also important to note that:
+
+- Being below average will have an approximately equal and opposite effect.
+- If a customer is multiple standard deviations above average, there are diminishing returns, meaning that each additional standard deviation above average has less impact on the churn or retention probability.
+- The same diminishing returns goes for being above average in multiple respects: the combined churn probability reduction will be lower than the sum of the quoted retention probability impacts.
+
+If we create a metrics dataset for just our _current_ customers who have at least 14 days tenure (in order to account for the fact that most new customers will have low metrics
+due to the short observation period), we can produce a forecast of how likely each customer is to churn or retain before their next observation date:
+
+| account_id | observation_date | churn_prob  | retain_prob |
+|------------|------------------|-------------|-------------|
+| 3          | 10/05/2020       | 0.021592298 | 0.978408    |
+| 4          | 10/05/2020       | 0.009901682 | 0.990098    |
+| 5          | 10/05/2020       | 0.03178912  | 0.968211    |
+| 6          | 10/05/2020       | 0.023116958 | 0.976883    |
+| 7          | 10/05/2020       | 0.005575805 | 0.994424    |
+
+We can gain confidence in our model by comparing our predictions for current customers with predictions on historical data (i.e. check that the model is calibrated) and with the _actual historical data. To do this, we compare the average churn rates:
+
+| measurement of churn | average  |
+|----------------------|----------|
+|    current forecasts | 0.044886 |
+| historical forecasts | 0.047886 |
+|   historical average | 0.047846 |
+
+We see that the mean predicted churn probability is very close to, although slightly lower than, those of the historical predictions, and close to the actual mean of the dataset. What might be responsible for this difference?
+
+When comparing the ratio of the average metrics values for current and historical datasets, we see that the average metric values for current customers are around 5% higher than those for the historical dataset in most cases:
+
+|                 metric | historical mean | current mean | current / historical |
+|-----------------------:|----------------:|-------------:|----------------------|
+|         like_per_month |      102.701945 |   110.268551 |             1.073675 |
+|    newfriend_per_month |        7.079585 |     7.599192 |             1.073395 |
+|         post_per_month |       42.991330 |    46.135846 |             1.073143 |
+|       adview_per_month |       41.563855 |    44.131359 |             1.061773 |
+|      dislike_per_month |       15.801018 |    16.870076 |             1.067658 |
+|     unfriend_per_month |        0.307689 |     0.313352 |             1.018404 |
+|      message_per_month |       62.230044 |    66.495200 |             1.068539 |
+|        reply_per_month |       23.687189 |    25.177120 |             1.062900 |
+|        adview_per_post |        1.618636 |     1.637879 |             1.011889 |
+|      reply_per_message |        0.378669 |     0.398294 |             1.051825 |
+|       post_per_message |        4.225650 |     4.486532 |             1.061738 |
+| unfriend_per_newfriend |        0.086465 |     0.085726 |             0.991462 |
+|           dislike_pcnt |        0.953466 |     0.984926 |             1.032995 |
+|    newfriend_pcnt_chng |        0.184072 |     0.239295 |             1.300005 |
+|   days_since_newfriend |        7.193891 |     7.997308 |             1.111680 |
+
+Because most metrics have a positive impact on engagement, higher metrics in the current dataset might explain the lower churn probability forecast.
+
 ### Future work
 
 Some ways in which this project could be expanded are:
