@@ -172,7 +172,7 @@ The relative impacts of each behaviour or group are more easily understood when 
 
 If the retention impact for a metric is 2%, a customer who is one standard deviation above average on that metric and average in all the other metrics has a forecast retention probability 2% higher than the average retention probability.
 
-These results would suggest that being _above average_ in messaging activity, posting and continuing to make friends have the biggest positive impact on retention, while _being above average_ seeing lots of ads, going long periods between making new friends and disliking content have the biggest negative impact on retention.
+These results would suggest that being _above average_ in messaging activity, posting and continuing to make friends have the biggest positive impact on retention, while being _above average_ for seeing lots of ads, going long periods between making new friends and disliking content have the biggest negative impact on retention.
 
 Interestingly, the ratio of likes to dislikes has a negligible impact on churn/retention.
 
