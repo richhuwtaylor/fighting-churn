@@ -193,6 +193,12 @@ due to the short observation period), we can produce a forecast of how likely ea
 | 6          | 10/05/2020       | 0.023116958 | 0.976883    |
 | 7          | 10/05/2020       | 0.005575805 | 0.994424    |
 
+The overall distribution of churn probabilities looks like this:
+
+<img src='./example-images/active-customer-churn-probability-distribution.png' alt='Active customer churn probability distribution'>
+
+There is a tail of accounts with significantly higher churn probability, where it would make sense for the business to focus its efforts with appropriate interventions, but no accounts have anywhere near 100% churn probability. The vast majority have less than 20% churn probability.
+
 We can gain confidence in our model by comparing our predictions for current customers with predictions on historical data (i.e. check that the model is calibrated) and with the _actual historical data. To do this, we compare the average churn rates:
 
 | measurement of churn | average  |
